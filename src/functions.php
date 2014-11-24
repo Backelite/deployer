@@ -10,6 +10,7 @@ use Deployer\Server;
 use Deployer\Stage;
 use Deployer\Task;
 use Deployer\Utils;
+use Symfony\Component\Console\Output\Output;
 
 /**
  * @param string $name
@@ -108,13 +109,15 @@ function run($command, $raw = false)
         $command = "cd {$workingPath} && $command";
     }
 
-    if (output()->isDebug()) {
+    $output = output();
+
+    if (Output::VERBOSITY_DEBUG <= $output->getVerbosity()) {
         writeln("[{$server->getConfiguration()->getHost()}] $command");
     }
 
     $output = $server->run($command);
 
-    if (output()->isDebug()) {
+    if (Output::VERBOSITY_DEBUG <= output()->getVerbosity()) {
         array_map(function ($output) use ($config) {
             write("[{$config->getHost()}] :: $output\n");
         }, explode("\n", $output));
@@ -162,7 +165,9 @@ function upload($local, $remote)
             ->ignoreDotFiles(false)
             ->in($local);
 
-        if (output()->isVerbose()) {
+        $output = output();
+
+        if (Output::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
             $progress = progressHelper($files->count());
         }
 
@@ -174,7 +179,7 @@ function upload($local, $remote)
                 Utils\Path::normalize($remote . '/' . $file->getRelativePathname())
             );
 
-            if (output()->isVerbose()) {
+            if (Output::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
                 $progress->advance();
             }
         }
@@ -258,7 +263,9 @@ function get($key, $default)
  */
 function ask($message, $default)
 {
-    if (output()->isQuiet()) {
+    $output = output();
+
+    if (Output::VERBOSITY_QUIET === $output->getVerbosity()) {
         return $default;
     }
 
@@ -276,7 +283,9 @@ function ask($message, $default)
  */
 function askConfirmation($message, $default = false)
 {
-    if (output()->isQuiet()) {
+    $output = output();
+
+    if (Output::VERBOSITY_QUIET === $output->getVerbosity()) {
         return $default;
     }
 

@@ -32,8 +32,9 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "develop-bk",
-            "dev-symfony-2.3": "symfony-2.3"
+            "dev-master": "2.1.x-dev",
+            "dev-symfony-2.3": "symfony-2.3",
+            "dev-develop-bk": "develop-bk"
         }
     },
     "suggest": {

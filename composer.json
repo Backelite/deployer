@@ -1,5 +1,5 @@
 {
-    "name": "elfet/deployer",
+    "name": "backelite/deployer",
     "description": "Deployment Tool",
     "license": "MIT",
     "authors": [
@@ -32,7 +32,9 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1.x-dev"
+            "dev-master": "2.1.x-dev",
+            "dev-symfony-2.3": "symfony-2.3",
+            "dev-symfony-2.5": "symfony-2.5"
         }
     },
     "suggest": {

@@ -350,3 +350,11 @@ function config()
 {
     return env()->getConfig();
 }
+
+/**
+ * Return path to php executable
+ */
+function php()
+{
+    return config()->getPhpPath();
+}

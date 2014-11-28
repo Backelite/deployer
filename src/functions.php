@@ -108,15 +108,24 @@ function run($command, $raw = false)
         $command = "cd {$workingPath} && $command";
     }
 
+    $serverInfos = $config->getName() . '[' . $config->getUser() . '@' . $config->getHost() . ']';
+
     if (output()->isDebug()) {
-        writeln("[{$server->getConfiguration()->getHost()}] $command");
+        writeln("{$serverInfos} $command");
     }
 
-    $output = $server->run($command);
+    try {
+        $output = $server->run($command);
+    } catch (\RuntimeException $e) {
+        $message = 'Server ' . $serverInfos . PHP_EOL;
+        $message.= 'Command "' . $command . '" failed' . PHP_EOL;
+        $message.= 'Error : ' . $e->getMessage();
+        throw new \RuntimeException($message, $e->getCode(), $e->getPrevious());
+    }
 
     if (output()->isDebug()) {
-        array_map(function ($output) use ($config) {
-            write("[{$config->getHost()}] :: $output\n");
+        array_map(function ($output) use ($serverInfos) {
+            write("{$serverInfos} :: $output\n");
         }, explode("\n", $output));
     }
 

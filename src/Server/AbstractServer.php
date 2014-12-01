@@ -48,7 +48,7 @@ abstract class AbstractServer implements ServerInterface
         $this->logger = new Logger($this->config->getName());
         $date = new \DateTime();
         $logDir = getcwd() . '/deploy/logs';
-        if (file_exists($logDir)) {
+        if (file_exists($logDir) === false) {
             @mkdir($logDir, 0777, true);
         }
         $logFile = $logDir . '/' . $date->format('d-m-Y_H-i-s') . '.log';

@@ -84,7 +84,7 @@ class PhpSecLib extends AbstractServer
     /**
      * {@inheritdoc}
      */
-    public function run($command)
+    public function execute($command)
     {
         $this->checkConnection();
 

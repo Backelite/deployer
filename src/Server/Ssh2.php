@@ -87,7 +87,7 @@ class Ssh2 extends AbstractServer
     /**
      * {@inheritdoc}
      */
-    public function run($command)
+    public function execute($command)
     {
         $this->checkConnection();
 
@@ -124,4 +124,4 @@ class Ssh2 extends AbstractServer
             throw new \RuntimeException('Can not download file.');
         }
     }
-} 
+}

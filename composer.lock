@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "67fb124ffbea413b1c63c02f58b5d899",
+    "hash": "a9d9c48c8861df1a334ccde72315603b",
     "packages": [
         {
             "name": "elfet/php-ssh",
@@ -429,22 +429,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "c0511f2df456014da07a2e607ada5510904c6db3"
+                "reference": "bce3c02126b8b20512432781e8ff48b33fab90ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c0511f2df456014da07a2e607ada5510904c6db3",
-                "reference": "c0511f2df456014da07a2e607ada5510904c6db3",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/bce3c02126b8b20512432781e8ff48b33fab90ba",
+                "reference": "bce3c02126b8b20512432781e8ff48b33fab90ba",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.0.0"
             },
             "require-dev": {
-                "phing/phing": "2.7.*",
-                "phpunit/phpunit": "4.0.*",
-                "sami/sami": "1.*",
-                "squizlabs/php_codesniffer": "1.*"
+                "phing/phing": "~2.7",
+                "phpunit/phpunit": "~4.0",
+                "sami/sami": "~2.0",
+                "squizlabs/php_codesniffer": "~1.5"
             },
             "suggest": {
                 "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
@@ -519,7 +519,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2014-11-20 09:58:23"
+            "time": "2014-12-03 11:30:12"
         },
         {
             "name": "psr/log",
@@ -607,32 +607,36 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.3.22",
+            "version": "v2.6.0",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "ffa26b9f54d1011c728ea9fada3e8f86b6174e7b"
+                "reference": "d3bac228fd7a2aac9193e241b239880b3ba39a10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/ffa26b9f54d1011c728ea9fada3e8f86b6174e7b",
-                "reference": "ffa26b9f54d1011c728ea9fada3e8f86b6174e7b",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/d3bac228fd7a2aac9193e241b239880b3ba39a10",
+                "reference": "d3bac228fd7a2aac9193e241b239880b3ba39a10",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/event-dispatcher": "~2.1"
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.1",
+                "symfony/process": "~2.1"
             },
             "suggest": {
-                "symfony/event-dispatcher": ""
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": "",
+                "symfony/process": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.6-dev"
                 }
             },
             "autoload": {
@@ -656,21 +660,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2014-11-17 16:27:42"
+            "time": "2014-11-20 13:24:23"
         },
         {
             "name": "symfony/finder",
-            "version": "v2.3.22",
+            "version": "v2.6.0",
             "target-dir": "Symfony/Component/Finder",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder.git",
-                "reference": "414c1ab217ea8584dbf111cd6839ade524caaffb"
+                "reference": "d574347c652a14cfee0349f744c7880e1d9029fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/414c1ab217ea8584dbf111cd6839ade524caaffb",
-                "reference": "414c1ab217ea8584dbf111cd6839ade524caaffb",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/d574347c652a14cfee0349f744c7880e1d9029fd",
+                "reference": "d574347c652a14cfee0349f744c7880e1d9029fd",
                 "shasum": ""
             },
             "require": {
@@ -679,7 +683,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.6-dev"
                 }
             },
             "autoload": {
@@ -703,10 +707,48 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2014-10-26 07:30:58"
+            "time": "2014-11-28 10:00:40"
         }
     ],
     "packages-dev": [
+        {
+            "name": "mikey179/vfsStream",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mikey179/vfsStream.git",
+                "reference": "61b12172292cf539685507aa65b076c1530e83c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/61b12172292cf539685507aa65b076c1530e83c1",
+                "reference": "61b12172292cf539685507aa65b076c1530e83c1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "org\\bovigo\\vfs\\": "src/main/php"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "homepage": "http://vfs.bovigo.org/",
+            "time": "2014-09-14 10:18:53"
+        },
         {
             "name": "phpunit/php-code-coverage",
             "version": "1.2.18",

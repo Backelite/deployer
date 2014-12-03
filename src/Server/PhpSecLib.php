@@ -7,6 +7,8 @@
 
 namespace Deployer\Server;
 
+use Deployer\Deployer;
+
 class PhpSecLib extends AbstractServer
 {
     /**
@@ -78,6 +80,7 @@ class PhpSecLib extends AbstractServer
     {
         if (null === $this->sftp) {
             $this->connect();
+            Deployer::get()->getWallet()->saveCredentials();
         }
     }
 

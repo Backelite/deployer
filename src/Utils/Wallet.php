@@ -70,28 +70,32 @@ class Wallet {
     /**
      * Get login registered for this id
      * @param string $id
+     * @param string $message
      * @return mixed
      */
-    public function getLogin($id) {
-        return $this->processCredential($id, 'login', self::getLoginQuestion($id));
+    public function getLogin($id, $message = null) {
+        return $this->processCredential($id, 'login', self::getLoginQuestion($id, $message));
     }
 
     /**
      * Get login question
      * @param string $id
+     * @param string $message
      * @return Question
      */
-    public static function getLoginQuestion($id) {
-        return new Question('Login for ' . $id . ' :');
+    public static function getLoginQuestion($id, $message = null) {
+        $questionMessage = $message !== null ? $message : 'Login for ' . $id;
+        return new Question('<question>' . $questionMessage . '</question> : ');
     }
 
     /**
      * Get login registered for this id
      * @param string $id
+     * @param string $message
      * @return mixed
      */
-    public function getPassword($id) {
-        return $this->processCredential($id, 'password', self::getPasswordQuestion($id));
+    public function getPassword($id, $message = null) {
+        return $this->processCredential($id, 'password', self::getPasswordQuestion($id, $message));
     }
 
     /**
@@ -99,9 +103,10 @@ class Wallet {
      * @param string $id
      * @return Question
      */
-    public static function getPasswordQuestion($id) {
-        $question = new Question('Password for ' . $id . ' :');
-        return $question->setHidden(true)->setHiddenFallback(false);
+    public static function getPasswordQuestion($id, $message = null) {
+        $questionMessage = $message !== null ? $message : 'Password for ' . $id;
+        $question = new Question('<question>' . $questionMessage . '</question> : ');
+        return $question->setHidden(true)->setHiddenFallback(true);
     }
 
     /**
@@ -136,11 +141,10 @@ class Wallet {
 
     protected function setCredential($id, $element, $value) {
         $this->credentials[$id][$element] = $value;
-        $this->saveCredentials();
         return $this;
     }
 
-    protected function saveCredentials() {
+    public function saveCredentials() {
         $data = json_encode($this->credentials);
         $result = file_put_contents($this->configFile, $data);
         return !($result === false);

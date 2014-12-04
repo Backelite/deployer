@@ -13,7 +13,8 @@ test:
             - "phpunit.xml"
         coverage: "coverage"
         args: "--stderr"
-#    php_mess_detector:
+    php_mess_detector:
+        path: "src"
 #        allow_failures: true
 #    php_code_sniffer:
 #        standard: "PSR2"
@@ -24,3 +25,7 @@ test:
 #        skip_classes: true
 #    php_loc:
 #        directory: "src"
+
+failure:
+    email:
+        committer: true

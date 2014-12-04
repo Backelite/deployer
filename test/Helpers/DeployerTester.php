@@ -18,6 +18,9 @@ class DeployerTester extends \PHPUnit_Framework_TestCase
         $dialog->expects($this->any())
             ->method('askHiddenResponse')
             ->will($this->returnValue('password'));
+        $dialog->expects($this->any())
+            ->method('ask')
+            ->will($this->returnValue('login'));
 
         $helperSetMock = $this->getMock('Symfony\Component\Console\Helper\HelperSet');
         $helperSetMock->expects($this->any())
@@ -62,4 +65,4 @@ class DeployerTester extends \PHPUnit_Framework_TestCase
         $appTester->run(['command' => $command]);
         return $appTester;
     }
-} 
+}

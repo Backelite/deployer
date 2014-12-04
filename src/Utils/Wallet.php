@@ -81,11 +81,11 @@ class Wallet {
      * Get login question
      * @param string $id
      * @param string $message
-     * @return Question
+     * @return string
      */
     public static function getLoginQuestion($id, $message = null) {
         $questionMessage = $message !== null ? $message : 'Login for ' . $id;
-        return new Question('<question>' . $questionMessage . '</question> : ');
+        return '<question>' . $questionMessage . '</question> : ';
     }
 
     /**
@@ -95,18 +95,17 @@ class Wallet {
      * @return mixed
      */
     public function getPassword($id, $message = null) {
-        return $this->processCredential($id, 'password', self::getPasswordQuestion($id, $message));
+        return $this->processCredential($id, 'password', self::getPasswordQuestion($id, $message), true);
     }
 
     /**
      * Get password question
      * @param string $id
-     * @return Question
+     * @return string
      */
     public static function getPasswordQuestion($id, $message = null) {
         $questionMessage = $message !== null ? $message : 'Password for ' . $id;
-        $question = new Question('<question>' . $questionMessage . '</question> : ');
-        return $question->setHidden(true)->setHiddenFallback(true);
+        return '<question>' . $questionMessage . '</question> : ';
     }
 
     /**
@@ -116,11 +115,11 @@ class Wallet {
      * @param Question $question
      * @return mixed String or null
      */
-    protected function processCredential($id, $element, Question $question) {
+    protected function processCredential($id, $element, $question, $hidden = false) {
         $credential = $this->getCredential($id, $element);
 
         if ($credential === null) {
-            $credential = $this->askQuestion($question);
+            $credential = $this->askQuestion($question, $hidden);
 
             if ($credential !== null) {
                 $this->setCredential($id, $element, $credential);
@@ -130,9 +129,14 @@ class Wallet {
         return $credential;
     }
 
-    protected function askQuestion(Question $question) {
-        $questionHelper = $this->helperSet->get('question');
-        return $questionHelper->ask($this->input, $this->output, $question);
+    protected function askQuestion($question, $hidden = false) {
+        $dialogHelper = $this->helperSet->get('dialog');
+
+        if ($hidden === true) {
+            return $dialogHelper->askHiddenResponse($this->output, $question);
+        } else {
+            return $dialogHelper->ask($this->output, $question);
+        }
     }
 
     protected function getCredential($id, $element) {

@@ -10,6 +10,7 @@ namespace Deployer;
 use Deployer\Console\RunTaskCommand;
 use Deployer\Server\ServerInterface;
 use Deployer\Stage\Stage;
+use Deployer\Utils\Wallet;
 use Deployer\Task\TaskFactory;
 use Deployer\Task\TaskInterface;
 use Symfony\Component\Console\Application;
@@ -44,6 +45,11 @@ class Deployer
      * @var HelperSet
      */
     private $helperSet;
+
+    /**
+     * @var Wallet
+     */
+    private $wallet;
 
     /**
      * List of all tasks.
@@ -93,6 +99,7 @@ class Deployer
         $this->input = $input;
         $this->output = $output;
         $this->helperSet = null === $helperSet ? $app->getHelperSet() : $helperSet;
+        $this->wallet = new Wallet($this->input, $this->output, $this->helperSet);
         self::$instance = $this;
     }
 
@@ -102,6 +109,13 @@ class Deployer
     public static function get()
     {
         return self::$instance;
+    }
+
+    /**
+     * @return Wallet
+     */
+    public function getWallet() {
+        return $this->wallet;
     }
 
     /**

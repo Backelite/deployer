@@ -2,6 +2,7 @@
     "name": "backelite/deployer",
     "description": "Deployment Tool",
     "license": "MIT",
+    "version": "2.5",
     "authors": [
         {
             "name": "Elfet",
@@ -25,10 +26,12 @@
         "symfony/console": "~2.5",
         "elfet/php-ssh": "~1.0",
         "phpseclib/phpseclib": "0.3.*@dev",
-        "kherge/amend": "~3.0"
+        "kherge/amend": "~3.0",
+        "monolog/monolog": "~1.11"
     },
     "require-dev": {
-        "phpunit/phpunit": "~3.7"
+        "phpunit/phpunit": "~3.7",
+        "mikey179/vfsStream": "~1"
     },
     "extra": {
         "branch-alias": {

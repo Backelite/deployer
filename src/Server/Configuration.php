@@ -8,6 +8,7 @@
 namespace Deployer\Server;
 
 use Ssh;
+use Deployer\Deployer;
 
 class Configuration
 {
@@ -96,6 +97,12 @@ class Configuration
      * @var string
      */
     private $pemFile;
+
+    /**
+     * PHP executable path
+     * @var type
+     */
+    private $phpPath = 'php';
 
     /**
      * @param string $host
@@ -195,10 +202,10 @@ class Configuration
      */
     public function getPassword()
     {
-        if(null === $this->password) {
-            $this->password = askHiddenResponse('Password:');
+        if(null === $this->password && $this->getUser() !== null) {
+            $message = sprintf('Password for %s@%s', $this->getUser(), $this->getHost());
+            $this->password = Deployer::get()->getWallet()->getPassword($this->getWalletId(), $message);
         }
-
         return $this->password;
     }
 
@@ -231,8 +238,9 @@ class Configuration
      */
     public function getPassPhrase()
     {
-        if(null === $this->passPhrase) {
-            $this->passPhrase = askHiddenResponse('PassPhrase:');
+        if(null === $this->passPhrase && $this->getUser() !== null) {
+            $message = sprintf('Passphrase for %s@%s', $this->getUser(), $this->getHost());
+            $this->passPhrase = Deployer::get()->getWallet()->getPassword($this->getWalletId(), $message);
         }
         return $this->passPhrase;
     }
@@ -251,7 +259,8 @@ class Configuration
     public function getUser()
     {
         if(null === $this->user) {
-            $this->user = ask("User:", trim(runLocally('whoami')));
+            $message = sprintf('User for %s', $this->getHost());
+            $this->user = Deployer::get()->getWallet()->getLogin($this->getWalletId(), $message);
         }
         return $this->user;
     }
@@ -406,5 +415,26 @@ class Configuration
     public function getPemFile()
     {
         return $this->pemFile;
+    }
+
+    /**
+     * Set path to php executable
+     * @param string $phpPath
+     */
+    public function setPhpPath($phpPath)
+    {
+        $this->phpPath = $phpPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhpPath()
+    {
+        return $this->phpPath;
+    }
+
+    public function getWalletId() {
+        return $this->getHost() . '-' . $this->getAuthenticationMethod();
     }
 }

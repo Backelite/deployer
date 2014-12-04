@@ -15,7 +15,7 @@ test:
         args: "--stderr"
     php_mess_detector:
         path: "src"
-#        allow_failures: true
+        allow_failures: true
 #    php_code_sniffer:
 #        standard: "PSR2"
 #    php_cpd:

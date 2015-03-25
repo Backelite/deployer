@@ -2,7 +2,7 @@
     "name": "backelite/deployer",
     "description": "Deployment Tool",
     "license": "MIT",
-    "version": "2.5",
+    "version": "2.5.1",
     "authors": [
         {
             "name": "Elfet",

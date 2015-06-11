@@ -93,6 +93,11 @@ class PhpSecLib extends AbstractServer
 
         $result = $this->sftp->exec($command);
 
+        $code = $this->sftp->getExitStatus();
+        if ($code !== 0) {
+            throw new \RuntimeException($result, $code);
+        }
+
         if ($this->sftp->getStdError()) {
             throw new \RuntimeException($this->sftp->getStdError());
         }

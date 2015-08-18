@@ -165,7 +165,10 @@ task('deploy:writable_dirs', function () {
             break;
     }
 
+    $releasePath = env()->getReleasePath();
     foreach ($dirs as $dir) {
+        // Create shared dir if does not exist
+        run("mkdir -p $releasePath/$dir");
         foreach ($commands as $command) {
             run(sprintf($command, $dir));
         }

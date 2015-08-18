@@ -24,7 +24,6 @@
         "php": ">=5.4.0",
         "symfony/finder": "2.3.*",
         "symfony/console": "2.3.*",
-        "herzult/php-ssh": "~1.0",
         "phpseclib/phpseclib": "0.3.*@dev",
         "kherge/amend": "~3.0",
         "monolog/monolog": "~1.6"
@@ -35,10 +34,15 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1.x-dev"
+            "dev-master": "2.1.x-dev",
+            "dev-symfony-2.3": "symfony-2.3",
+            "dev-develop-bk": "develop-bk"
         }
     },
     "suggest": {
         "deployphp/recipes": "3rd party recipes for Deployer"
+    },
+    "provide": {
+        "ext-ssh2": "*"
     }
 }

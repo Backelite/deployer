@@ -8,6 +8,7 @@
 namespace Deployer\Server;
 
 use Ssh;
+use Deployer\Deployer;
 
 class Ssh2 extends AbstractServer
 {
@@ -81,6 +82,7 @@ class Ssh2 extends AbstractServer
     {
         if (null === $this->session) {
             $this->connect();
+            Deployer::get()->getWallet()->saveCredentials();
         }
     }
 

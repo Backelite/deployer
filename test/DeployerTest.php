@@ -23,4 +23,3 @@ class DeployerTest extends DeployerTester
         $appTester = $this->runCommand('task');
     }
 }
- 

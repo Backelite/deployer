@@ -7,6 +7,8 @@
 
 namespace Deployer\Server;
 
+use Deployer\Deployer;
+
 class PhpSecLib extends AbstractServer
 {
     /**
@@ -78,6 +80,7 @@ class PhpSecLib extends AbstractServer
     {
         if (null === $this->sftp) {
             $this->connect();
+            Deployer::get()->getWallet()->saveCredentials();
         }
     }
 
@@ -89,6 +92,11 @@ class PhpSecLib extends AbstractServer
         $this->checkConnection();
 
         $result = $this->sftp->exec($command);
+
+        $code = $this->sftp->getExitStatus();
+        if ($code !== 0) {
+            throw new \RuntimeException($result, $code);
+        }
 
         if ($this->sftp->getStdError()) {
             throw new \RuntimeException($this->sftp->getStdError());

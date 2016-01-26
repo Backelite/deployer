@@ -185,11 +185,6 @@ task('deploy:vendors', function () {
     cd($releasePath);
     $prod = get('env', 'prod');
     $php = php();
-    $isComposer = run("if [ -e $releasePath/composer.phar ]; then echo 'true'; fi");
-
-    if ('true' !== $isComposer) {
-        run("curl -s http://getcomposer.org/installer | $php");
-    }
 
     // Check if we're to copy the vendors
     if (get('composer_copy_vendors', false)) {

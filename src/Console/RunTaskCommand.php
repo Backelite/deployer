@@ -62,10 +62,10 @@ class RunTaskCommand extends BaseCommand
         );
 
         $this->addOption(
-            'dry-run',
+            'no-passphrase',
             null,
             InputOption::VALUE_NONE,
-            'Run without execution command on servers.'
+            'Do not ask passphrase for ssh connection.'
         );
 
         $this->addOption(
